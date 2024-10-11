@@ -1,5 +1,7 @@
 FROM ubuntu:22.04
 
+ENV TERM=xterm
+
 RUN apt update
 RUN apt install -y git make gcc g++ zlib1g-dev ncbi-blast+
 
