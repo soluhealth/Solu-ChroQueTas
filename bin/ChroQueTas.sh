@@ -272,7 +272,7 @@ echo -e "${COL_yellow}Running protein prediction and extraction (step 1/4)${COL_
 miniprot -t ${NCPUS} -d ${OUTWD}/tmp/${INGENOME}.mpi ${INGENOME_PATH} 2>/dev/null
 for QUERYPROT in $(<${OUTWD}/tmp/queries_list.tmp); do
     prot_query_name="${INGENOME}_${QUERYPROT}"
-    miniprot -t ${NCPUS} ${OUTWD}/tmp/${INGENOME}.mpi ${FungAMR}/${SCHEME}/${QUERYPROT}.faa --trans > ${OUTWD}/tmp/${prot_query_name}.tmp 2>/dev/null
+    miniprot -t ${NCPUS} --outn 1 ${OUTWD}/tmp/${INGENOME}.mpi ${FungAMR}/${SCHEME}/${QUERYPROT}.faa --trans > ${OUTWD}/tmp/${prot_query_name}.tmp 2>/dev/null
     head -n 1 ${OUTWD}/tmp/${prot_query_name}.tmp > ${OUTWD}/${prot_query_name}.paf
     tail -n+2 ${OUTWD}/tmp/${prot_query_name}.tmp | grep "^\#\#STA" | tr '\t' '\n' | sed "s/^##STA/>${prot_query_name}/" > ${OUTWD}/${prot_query_name}.faa
     #rm ${OUTWD}/tmp/${prot_query_name}.tmp
